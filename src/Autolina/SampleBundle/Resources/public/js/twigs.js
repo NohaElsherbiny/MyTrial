@@ -38,7 +38,7 @@ document.write('<script src="js/custom.js"></script>');
               var newRow = $("<tr><td>"+mail+"</td><td class=\"table-action-hide \"><a href=\"\" data-toggle=\"modal\" data-target=\".make-modal-lg\" id="+mail+" style=\"opacity: 0;\"><i class=\"fa fa-pencil\"></i></a><a href=\"\" class=\"delete-row \" id="+response+" style=\"opacity: 0;\"><i class=\"fa fa-trash-o\"></i></a></td></tr>");
               $("#table2").append(newRow);
               //newRow.appendTo("#table2");
-              jQuery('#table2').dataTable.fnAddData(["<tr><td>"+mail+"</td><td class=\"table-action-hide \"><a href=\"\" data-toggle=\"modal\" data-target=\".make-modal-lg\" id="+mail+" style=\"opacity: 0;\"><i class=\"fa fa-pencil\"></i></a><a href=\"\" class=\"delete-row \" id="+response+" style=\"opacity: 0;\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"]);
+              //jQuery('#table2').dataTable.fnAddData(["<tr><td>"+mail+"</td><td class=\"table-action-hide \"><a href=\"\" data-toggle=\"modal\" data-target=\".make-modal-lg\" id="+mail+" style=\"opacity: 0;\"><i class=\"fa fa-pencil\"></i></a><a href=\"\" class=\"delete-row \" id="+response+" style=\"opacity: 0;\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"]);
               jQuery('#table2').dataTable({
                 "sPaginationType": "full_numbers",
                 "bRetrieve": true
