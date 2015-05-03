@@ -1,0 +1,119 @@
+      <!DOCTYPT html>
+
+
+      <h5 class="sidebartitle">Navigation</h5>
+ 		<ul class="nav nav-pills nav-stacked nav-bracket">
+            <li class="active"><a href="index.php"><i class="fa fa-home"></i><span>Startseite</span></a></li>        
+            <li><a href="sales.php"><i class="fa fa-reorder"></i><span>Sales (Garagen)</span></a>
+         
+            <li class="nav-parent"><a href=""><i class="fa fa-group"></i><span>Kunden</span></a>
+              <ul class="children" style="">
+                <li><a href="dealer.php"><i class="fa fa-group"></i>Händler</a></li>
+                <li><a href="private.php"><i class="fa fa-user-md"></i>Private Anbieter</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-parent"><a href=""><i class="fa fa-star"></i><span>Top Angebote</span></a>
+              <ul class="children" style="">
+                <li><a href="top_offer_mainpage.php"><i class="fa fa-caret-right"></i>Startseite Top Angebote</a></li>
+                <li><a href="premium_single.php"><i class="fa fa-th-list"></i>Premium Single</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-parent"><a href=""><i class="fa fa-signal"></i><span>Verkaufsstatistik</span></a>
+              <ul class="children" style="">
+                <li><a href="total_sales.php"><i class="fa fa-line-chart"></i>Summary Verkauf</a></li>
+                <li><a href="all_sales.php"><i class="fa fa-th-list"></i>Alle Verkäufer (ADMIN)</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-parent"><a href=""><i class="fa fa-desktop"></i><span>Verwaltung</span></a>
+              <ul class="children" style="">
+                <li><a href="request_list.php"><i class="fa fa-list-alt"></i>Anfragen</a></li>
+                <li><a href="private_cars.php"><i class="fa fa-list-alt"></i>Private Autos</a></li>            
+                <li><a href="mail_log.php"><i class="fa fa-envelope"></i>Mail-Log</a></li>
+                <li><a href="phone_log.php"><i class="fa fa-phone"></i>Telefon-Log</a></li>
+                <li><a href="cronjobs.php"><i class="fa fa-envelope"></i>Cronjobs</a></li>
+                <li><a href="vouchers.php"><i class="fa fa-gift"></i>Gutscheine</a></li>
+                <li><a href="email_blacklist.php"><i class="fa fa-gift"></i>E-Mail Blacklist</a></li> 
+                <li><a href="manage_makes.php"><i class="fa fa-car"></i>Manage Makes</a></li>
+                <li><a href="manage_models.php"><i class="fa fa-car"></i>Manage Models</a></li>
+                <li><a href="jobs_log.php"><i class="fa fa-table"></i>Job summary</a></li>          
+              </ul>
+              
+              </li>
+    
+              <li class="nav-parent"><a href=""><i class="fa fa-building"></i><span>Control</span></a>
+              <ul class="children" style="">
+                <li><a href="users.php"><i class="fa fa-user"></i>Benutzer CRM</a></li>
+                <li><a href="manage_language.php"><i class="fa fa-comments"></i>Sprachen Manager</a></li>
+<!--                 <li><a href="manage_email_template.php"><i class="fa fa-file"></i>Email Manager</a></li> -->
+              </ul>
+            </li>
+        
+        </ul>
+        
+    <!-- End from the Navigation -->  
+      
+      <div class="infosummary">
+        <h5 class="sidebartitle">Statistik</h5>    
+        <ul>
+            <li>
+                <div class="datainfo">
+                {%block datainfo1%}
+                    <span class="text-muted">Abonnierte Händler</span>
+                    <h4>2'204</h4>
+                {%endblock%}
+                </div>
+            </li>
+            <li>
+                <div class="datainfo">
+                {%block datainfo2%}
+                    <span class="text-muted">Auto Inserate</span>
+                    <h4>88'888</h4>
+                {%endblock%}
+                </div>
+            </li>
+            <li>
+                <div class="datainfo">
+                {%block datainfo3%}
+                    <span class="text-muted">Job Inserate</span>
+                    <h4>221</h4>
+                {%endblock%}
+                </div>
+            </li>              
+            <li>
+                <div class="datainfo">
+                {%block datainfo4%}
+                    <span class="text-muted">B2B Tauschfahrzeuge</span>
+                    <h4>422</h4>
+                {%endblock%}
+                </div>
+            </li>                         
+            <li>
+                <div class="datainfo">
+                {%block datainfo5%}
+                    <span class="text-muted">Registrierte Private</span>
+                    <h4>4'801</h4>
+                {%endblock%}
+                </div>
+            </li>
+            <li>
+                <div class="datainfo">
+                {%block datainfo6%}
+                    <span class="text-muted">Anfragen</span>
+                    <h4>101</h4>
+                {%endblock%}
+                </div>
+            </li> 
+            <li>
+                <div class="datainfo">
+                {%block datainfo7%}
+                    <span class="text-muted">Autos zu verkaufen</span>
+                    <h4>54</h4>
+                {%endblock%}
+                </div>
+            </li>              
+                      
+        </ul>
+      </div>

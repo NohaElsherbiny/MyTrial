@@ -1,0 +1,14 @@
+autolina_sample_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AutolinaSampleBundle:Default:index }
+autolina_sample_mySamplePage:
+    path:     /mySamplePage
+    defaults: { _controller: AutolinaSampleBundle:Default:samplePage }
+
+autolina_sample_delete:
+    path:     /delete
+    defaults: { _controller: AutolinaSampleBundle:Default:delete }
+
+autolina_sample_add:
+    path:     /add
+    defaults: { _controller: AutolinaSampleBundle:Default:add }

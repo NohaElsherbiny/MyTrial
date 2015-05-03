@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{%block head%}  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="shortcut icon" href="{{asset('bundles/autolinasample/images/favicon.png')}}" type="image/png">
+  
+  {%block stylesheets%}
+  	<link href="{{asset('bundles/autolinasample/css/style_preview.css')}}" rel="stylesheet" type="text/css" />
+  {%endblock%}
+
+  {%block javascript%}
+	<script type="text/javascript" src="{{asset('bundles/autolinasample/js/tooltip.js')}}"></script>
+	<script type="text/javascript" src="{{asset('bundles/autolinasample/js/ajax.js')}}"></script>
+  {%endblock%}
+
+  <title>{% block title %}Privat Kunden{% endblock%}</title>
+  
+  {%block main_stylesheets%}
+  <link href="{{asset('bundles/autolinasample/css/bootstrap-fileupload.min.css')}}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{asset('bundles/autolinasample/css/style.default.css')}}">
+  <link rel="stylesheet" href="{{asset('bundles/autolinasample/css/jquery.datatables.css')}}">
+  <link href="{{asset('bundles/autolinasample/css/jquery.tagsinput.css')}}" rel="stylesheet"/>
+  <link href="{{asset('bundles/autolinasample/css/bootstrap-timepicker.min.css')}}" rel="stylesheet"/>
+  {%endblock%}
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+{%endblock%}
+</head>
+
+<body>
+{%block body%}
+  <!-- Preloader -->
+  <div id="preloader">
+  {% block preloader%}
+    
+    <div id="status">
+    {%block status%}
+      <i class="fa fa-spinner fa-spin"></i>
+    {%endblock%}
+    </div>
+
+  {%endblock%}
+  </div> <!-- Preloader -->
+
+  <section>
+  {%block section%}
+    
+    <div class="leftpanel">
+    {%block leftpanel%}
+      
+      <div class="logopanel">
+      {%block logopanel%}
+        <img alt="" src="{{asset('bundles/autolinasample/images/logo.png')}}">
+      {%endblock%}
+      </div><!-- logopanel -->
+
+
+      <div class="leftpanelinner">
+      {%block leftpanelinner%}  
+        <!-- This is only visible to small devices -->
+        <div class="visible-xs hidden-sm hidden-md hidden-lg">   
+        {%block visiblehidden%}
+            <div class="media userlogged">
+            {%block userlogged%}
+                <img alt="" src="{{asset('bundles/autolinasample/images/photos/loggeduser.png')}}" class="media-object">
+                <div class="media-body">
+                {%block mediabody%}
+                    <h4>Ibrahim Yildiz</h4>
+                    <span>"Life is Life..."</span>
+                {%endblock%}
+                </div>
+            {%endblock%}    
+            </div>
+            <h5 class="sidebartitle actitle">Account</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+              <li><a href="new_user.php"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+              <li><a href=""><i class="fa fa-cog"></i> <span>Konto Einstellungen Settings</span></a></li>
+
+              <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Abmelden</span></a></li>
+            </ul>
+        {%endblock%}
+        </div>
+      
+        <!-- Sart main Navigation -->  
+        <!--?php include 'inc/navigation.php';?-->
+        <!-- infosummary -->
+        {% include "AutolinaSampleBundle::navigation.html.twig"%}
+
+      {%endblock%}
+      </div><!-- leftpanelinner -->
+
+    {%endblock%}
+    </div><!-- leftpanel -->
+    
+    <div class="mainpanel">
+    {%block mainpanel%}
+      <div class="headerbar">
+      {%block headerbar%}
+        <a class="menutoggle"><i class="fa fa-bars"></i></a>
+      
+        <div class="header-right">
+        {%block headerright%}  
+          <ul class="headermenu">
+            <li>
+              <div class="btn-group">
+              {%block btngroup%}
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <img src="{{asset('bundles/autolinasample/images/photos/loggeduser.png')}}" alt="" />
+                  Ibrahim Yildiz
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                  <li><a href="new_user.php"><i class="glyphicon glyphicon-user"></i> Mein Profil</a></li>
+                
+                 <li><a href="login.php"><i class="glyphicon glyphicon-log-out"></i> Abmelden</a></li>
+                </ul>
+              {%endblock%}
+              </div>
+            </li>
+          </ul>
+        {%endblock%}
+        </div><!-- header-right -->
+      {%endblock%}
+      </div><!-- headerbar -->
+        
+      <div class="pageheader">
+      {%block pageheader%}
+        <h2><i class="fa fa-table"></i>Manage Mails</h2>
+      {%endblock%}
+      </div>
+    
+      <div class="contentpanel">
+      {%block contentpanel%}
+        <div class="row">
+        {%block row%}
+          <div class="col-md-8">
+          {%block colmd8%}
+            <div class="panel panel-default">
+            {%block panelpaneldefault%}
+              <div class="panel-body">
+              {%block panelbody%}
+                <div class="col-md-12">
+                {%block colmd12%}  
+                  <div class="table-responsive">
+                  {%block tableresponsive%}
+                    
+                    <div class="form-group">
+                    {%block formgroup%}  
+                      <!--TODO add mail-->
+                      <div class="col-sm-3">
+                      {%block colsm3%}
+                        <input type="text" placeholder="E-mail" id="addedmail" class="form-control">
+                      {%endblock%}
+                      </div><!--col-sm-3-->
+
+                      <div class="col-sm-2">
+                      {%block colsm2%}
+                        <button class="btn btn-primary add-row" type="submit" >Erfassen</button>
+                        <input type="hidden" id="addURL" value="{{path('autolina_sample_add')}}">
+                      {%endblock%}
+                      </div><!--col-sm-2-->
+
+                    {%endblock%}  
+                    </div><!--form-group-->
+       
+                    <table class="table table-hidaction table-hover mb30 mailLogTable sortingTable" id="table2">
+                    <thead>
+                      <tr>
+                        <th>E-mail</th>
+                        <th>Actions</th>          
+                      </tr>
+                    </thead>
+
+                    <tbody id="tablebody">
+                      {% for mail in mails %}
+                      <tr>
+                        <td>{{mail.email}}</td>
+                        <td class="table-action-hide ">
+                          <a href="" data-toggle="modal" data-target=".make-modal-lg" id="{{mail.email}}" style="opacity: 0;"><i class="fa fa-pencil"></i></a>
+                          <a href="" class="delete-row " id="{{mail.id}}" style="opacity: 0;"><i class="fa fa-trash-o"></i></a>
+                        </td>           
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                    </table>
+                    <input id="TargetURL" type="hidden"  value="{{path('autolina_sample_delete')}}" />  
+                  {%endblock%}
+                  </div><!-- table-responsive -->
+                {%endblock%}
+                </div><!-- col-md-12 -->      
+              {%endblock%}
+              </div><!--panel-body-->
+            {%endblock%}
+            </div><!-- panel -->
+          {%endblock%}
+          </div><!-- col-md 8 -->      
+        {%endblock%}
+        </div><!--row-->
+      {%endblock%}
+      </div><!-- contentpanel -->    
+    {%endblock%}
+    </div><!-- mainpanel -->
+
+  {%endblock%}
+  </section>
+
+  <div class="modal fade make-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  {%block modalfade%}
+    <div class="modal-dialog modal-lg">
+    {%block modaldialog%}
+      <div class="modal-content">
+      {%block modalcontent%}  
+        
+        <div class="modal-header">
+        {%block modalheader%}
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+            <h4 class="modal-title">Edit E-mail</h4>
+        {%endblock%}
+        </div>
+      
+        <div class="modal-body">
+        {%block modalbody%}
+          <form class="form-horizontal">
+            <div class="form-group">
+            {%block formhorizontal%}
+              <label class="col-sm-3 control-label">E-mail</label>
+              <div class="col-sm-6">
+              {%block colsm6%}
+                <input type="text" class="form-control" id="toEdit" value="joedoe@notneeded.com">
+              {%endblock%}
+              </div>
+            {%endblock%}
+            </div>
+
+            <div class="panel-footer">
+            {%block panelfooter%}
+              <div class="row">
+              {%block rowfooter%}
+                <div class="col-sm-6 col-sm-offset-3">
+                {%block colsm6offset3%}
+                  <button class="btn btn-primary" type="submit">Save Changes</button>
+                {%endblock%}
+                </div>
+              {%endblock%}
+              </div>
+            {%endblock%}  
+            </div>
+          </form>
+        {%endblock%}
+        </div>
+    
+    {%endblock%}
+    </div>
+  {%endblock%}
+  </div>
+{%endblock%}
+</div>
+
+
+{%block twigjs%}
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.sparkline.min.js"></script>
+<script src="js/toggles.min.js"></script>
+<script src="js/retina.min.js"></script>
+<script src="js/jquery.cookies.js"></script>
+<script type="text/javascript" src="wz_tooltip.js"></script> 
+
+<script src="js/jquery.datatables.min.js"></script>
+<!--script src="js/jquery.datatables.js"></script-->
+<script src="js/chosen.jquery.min.js"></script>
+
+
+<script src="js/custom.js"></script>
+<script type="text/javascript" src="{{asset('bundles/autolinasample/js/twigs.js')}}"></script>
+{%endblock%}
+{%endblock%}
+</body>
+</html>
