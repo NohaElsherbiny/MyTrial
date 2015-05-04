@@ -1,3 +1,4 @@
+
 /*document.write('<script src="js/jquery-1.10.2.min.js"></script>');
 document.write('<script src="js/jquery-migrate-1.2.1.min.js"></script>');
 document.write('<script src="js/bootstrap.min.js"></script>');
@@ -7,11 +8,8 @@ document.write('<script src="js/toggles.min.js"></script>');
 document.write('<script src="js/retina.min.js"></script>');
 document.write('<script src="js/jquery.cookies.js"></script>');
 document.write('<script type="text/javascript" src="wz_tooltip.js"></script>'); 
-
 document.write('<script src="js/jquery.datatables.min.js"></script>');
 document.write('<script src="js/chosen.jquery.min.js"></script>');
-
-
 document.write('<script src="js/custom.js"></script>');
 */
   jQuery(document).ready(function() {
@@ -35,13 +33,12 @@ document.write('<script src="js/custom.js"></script>');
           data: {mail : mail},
           success: function(response){
             if(response == parseInt(response, 10)){
-              var newRow = $("<tr><td>"+mail+"</td><td class=\"table-action-hide \"><a href=\"\" data-toggle=\"modal\" data-target=\".make-modal-lg\" id="+mail+" style=\"opacity: 0;\"><i class=\"fa fa-pencil\"></i></a><a href=\"\" class=\"delete-row \" id="+response+" style=\"opacity: 0;\"><i class=\"fa fa-trash-o\"></i></a></td></tr>");
-              $("#table2").append(newRow);
-              //newRow.appendTo("#table2");
-              //jQuery('#table2').dataTable.fnAddData(["<tr><td>"+mail+"</td><td class=\"table-action-hide \"><a href=\"\" data-toggle=\"modal\" data-target=\".make-modal-lg\" id="+mail+" style=\"opacity: 0;\"><i class=\"fa fa-pencil\"></i></a><a href=\"\" class=\"delete-row \" id="+response+" style=\"opacity: 0;\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"]);
               jQuery('#table2').dataTable({
                 "sPaginationType": "full_numbers",
-                "bRetrieve": true
+                "bDestroy":true,
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": $('#updateURL').val()
               });
 
               alert("SUCCESS, id ="+response);
@@ -89,6 +86,13 @@ document.write('<script src="js/custom.js"></script>');
   
     jQuery('#table2').dataTable({
       "sPaginationType": "full_numbers",
-      "bRetrieve": true
-    });
+      "bProcessing": true,
+      "bServerSide": true,
+      "sAjaxSource": $('#updateURL').val(),
+      "columnDefs": [ {
+        "targets": 1,
+        "data": null,
+        "defaultContent": "<button>Click!</button>"
+      } ]
+      });
   });

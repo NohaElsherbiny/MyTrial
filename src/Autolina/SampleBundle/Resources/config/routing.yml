@@ -12,3 +12,7 @@ autolina_sample_delete:
 autolina_sample_add:
     path:     /add
     defaults: { _controller: AutolinaSampleBundle:Default:add }
+
+autolina_sample_update:
+    path:     /update
+    defaults: { _controller: AutolinaSampleBundle:Default:update }
