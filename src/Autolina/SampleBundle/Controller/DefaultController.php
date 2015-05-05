@@ -26,15 +26,33 @@ class DefaultController extends Controller
         return $this->render('AutolinaSampleBundle:Default:samplePage.html.twig',array("mails"=>$mails));
     }
 
-    public function upAction(Request $request){
-
+    public function editAction(Request $request)
+    {
+    	$data = $request->request->get('request');
+    	$id = $request->get('id');
     	$em = $this->getDoctrine()->getManager();
-		$output = $em->getRepository('AutolinaSampleBundle:Mail')
-						->getBlackList();
-    	return new Response(
-      		json_encode($output)
-    	);
+		$mail = $em->getRepository('AutolinaSampleBundle:Mail')
+						->find($id);	
+
+     	$edittedmail = $request->get('mail');
+    	$mail->setEmail($edittedmail);
+
+    	$validator = $this->get('validator');
+		$errors = $validator->validate($mail);
+		if(count($errors) > 0){
+			$errorsString = (string) $errors;
+			return new Response($errorsString);
+		}
+		else{
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($mail);
+			$em->flush();
+			$successString = $id;
+			$this->forward('AutolinaSampleBundle:Default:update');
+			return new Response($successString);
+		}
     }
+    
     public function updateAction(Request $request)
     {
    	    $get = $request->query->all();
@@ -43,12 +61,13 @@ class DefaultController extends Controller
     	 */
     	$columns = array( 'email', 'id' );
     	$get['columns'] = &$columns;
-
+    	$get['iDisplayLength'] = 5;
+    	
     	$em = $this->getDoctrine()->getEntityManager();
     	$rResult = $em->getRepository('AutolinaSampleBundle:Mail')->ajaxTable($get, true)->getArrayResult();
+    	
     	/* Data set length after filtering */
     	$iFilteredTotal = count($rResult);
-
 
     	/*
      	 * Output
@@ -69,14 +88,13 @@ class DefaultController extends Controller
        			}elseif ( $columns[$i] != ' ' ){
        	  			/* General output */
        				$row[] = $aRow[ $columns[$i] ];
-
        				for ($i=0; $i<2; $i++){
     			 		if($i==0)
     			 			$toData[]=$row[$i];
     			 		elseif ($i==1)
     			 			$toData[]='<td class="table-action-hide">
-                          <a href="" data-toggle="modal" data-target=".make-modal-lg" style="opacity: 1;"><i class="fa fa-pencil"></i></a>
-                          <a href="" class="delete-row " style="opacity: 1;"><i class="fa fa-trash-o"></i></a>
+                          <a href="#" id="editRow" data-toggle="modal" data-target=".make-modal-lg" data='.$row[0].' data-id='.$aRow[ $columns[1]].' style="opacity: 0;"><i class="fa fa-pencil"></i></a>
+                          <a href="#" class="delete-row" id="delRow" data-type="Edit" data-id='.$aRow[ $columns[1]].' style="opacity: 1;"><i class="fa fa-trash-o"></i></a>
                         </td>';
     			 	}
     			}
@@ -96,14 +114,12 @@ class DefaultController extends Controller
     {
     	$data = $request->request->get('request');
     	$id = $request->get('id');
-    	
     	$em = $this->getDoctrine()->getManager();
 		$mail = $em->getRepository('AutolinaSampleBundle:Mail')
 						->find($id);	
         $em->remove($mail);
         $em->flush();
-        $this->forward('AutolinaSampleBundle:Default:update');
-		return new Response();
+        return new Response();
     }
 
     public function addAction(Request $request)
@@ -114,7 +130,7 @@ class DefaultController extends Controller
     	$validator = $this->get('validator');
 		$errors = $validator->validate($f);
 		if(count($errors) > 0){
-			$errorsString = /*(string) $errors*/"ERROR";
+			$errorsString = (string) $errors;
 			return new Response($errorsString);
 		}
 		else{

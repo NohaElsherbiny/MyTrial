@@ -81,7 +81,7 @@ class MailRepository extends EntityRepository
      * Set to default
      */
     if(!isset($get['columns']) || empty($get['columns']))
-      $get['columns'] = array('email');
+      $get['columns'] = array('id');
 
 
 
@@ -94,7 +94,6 @@ class MailRepository extends EntityRepository
       ->createQueryBuilder($alias)
       ->select(str_replace(" , ", " ", implode(", ", $aColumns)));
 
-    //print_r($cb);
     if ( isset( $get['iDisplayStart'] ) && $get['iDisplayLength'] != '-1' ){
       $cb->setFirstResult( (int)$get['iDisplayStart'] )
         ->setMaxResults( (int)$get['iDisplayLength'] );
@@ -133,7 +132,7 @@ class MailRepository extends EntityRepository
      * Get data to display
      */
     $query = $cb->getQuery();
-
+    
     if($flag)
       return $query;
     else
@@ -151,7 +150,7 @@ class MailRepository extends EntityRepository
      return $aResultTotal[0][1];
   }
 
-  public function getBlackList(){
+  /*public function getBlackList(){
   	$cols=array();
   	$count= $this->getCount();
   	$mails= $this->getEntityManager()
@@ -172,5 +171,5 @@ class MailRepository extends EntityRepository
 	}
 	print_r($cols);
 	return $cols;
-  }
+  }*/
 }

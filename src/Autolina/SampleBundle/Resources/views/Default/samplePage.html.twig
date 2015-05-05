@@ -163,7 +163,7 @@
 
                       <div class="col-sm-2">
                       {%block colsm2%}
-                        <button class="btn btn-primary add-row" type="submit" >Erfassen</button>
+                        <button class="btn btn-primary add-row" id="addRow" type="submit" >Erfassen</button>
                         <input type="hidden" id="addURL" value="{{path('autolina_sample_add')}}">
                       {%endblock%}
                       </div><!--col-sm-2-->
@@ -178,18 +178,18 @@
                         <th>Actions</th>          
                       </tr>
                     </thead>
-
-                    <tbody id="tablebody table-action-hide">
+                    
+                    <tbody>
                       {% for mail in mails %}
                       <tr>
                         <td>{{mail.email}}</td>
-                        <td class="table-action-hide ">
-                          <a href="" data-toggle="modal" data-target=".make-modal-lg" id="{{mail.email}}" style="opacity: 0;"><i class="fa fa-pencil"></i></a>
+                        <td class="table-action-hide">
+                          <!--<a href="" data-toggle="modal" data-target=".make-modal-lg" id="{{mail.email}}" style="opacity: 0;"><i class="fa fa-pencil"></i></a>
                           <a href="" class="delete-row " id="{{mail.id}}" style="opacity: 0;"><i class="fa fa-trash-o"></i></a>
-                        </td>           
+                        --></td>           
                       </tr>
                       {%endfor%}
-                    </tbody>
+                    </tbody> 
                     </table>
                     <input id="TargetURL" type="hidden"  value="{{path('autolina_sample_delete')}}" />  
                   {%endblock%}
@@ -212,8 +212,10 @@
   {%endblock%}
   </section>
 
-  <div class="modal fade make-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal fade make-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   {%block modalfade%}
+  <input type="hidden" id="editURL" value="{{path('autolina_sample_edit')}}">
+          
     <div class="modal-dialog modal-lg">
     {%block modaldialog%}
       <div class="modal-content">
@@ -234,7 +236,7 @@
               <label class="col-sm-3 control-label">E-mail</label>
               <div class="col-sm-6">
               {%block colsm6%}
-                <input type="text" class="form-control" id="toEdit" value="joedoe@notneeded.com">
+                <input type="text" class="form-control" id="toEdit" >
               {%endblock%}
               </div>
             {%endblock%}
@@ -246,7 +248,7 @@
               {%block rowfooter%}
                 <div class="col-sm-6 col-sm-offset-3">
                 {%block colsm6offset3%}
-                  <button class="btn btn-primary" type="submit">Save Changes</button>
+                  <button class="btn btn-primary" id="submitEdit" type="submit">Save Changes</button>
                 {%endblock%}
                 </div>
               {%endblock%}
