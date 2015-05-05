@@ -20,6 +20,7 @@ class MailRepository extends EntityRepository
 			)
 			->getResult();
 	}
+
 	public function getFilteredCount(array $get)
   	{
     	/* Indexed column (used for fast and accurate table cardinality) */
@@ -39,6 +40,10 @@ class MailRepository extends EntityRepository
     	 * word by word on any field. It's possible to do here, but concerned about efficiency
     	 * on very large tables, and MySQL's regex functionality is very limited
     	 */
+    	$aColumns = array();
+
+    foreach($get['columns'] as $value) $aColumns[] = $alias .'.'. $value;
+    	
     	if ( isset($get['sSearch']) && $get['sSearch'] != '' ){
       		$aLike = array();
       		for ( $i=0 ; $i<count($aColumns) ; $i++ ){
@@ -58,6 +63,7 @@ class MailRepository extends EntityRepository
 	  	$aResultTotal = $query->getResult();
   		return $aResultTotal[0][1];
     }
+
     /**
    	 * @param array $get
    	 * @param bool $flag
@@ -75,7 +81,7 @@ class MailRepository extends EntityRepository
      * Set to default
      */
     if(!isset($get['columns']) || empty($get['columns']))
-      $get['columns'] = array('id');
+      $get['columns'] = array('email');
 
 
 
@@ -88,11 +94,12 @@ class MailRepository extends EntityRepository
       ->createQueryBuilder($alias)
       ->select(str_replace(" , ", " ", implode(", ", $aColumns)));
 
-
+    //print_r($cb);
     if ( isset( $get['iDisplayStart'] ) && $get['iDisplayLength'] != '-1' ){
       $cb->setFirstResult( (int)$get['iDisplayStart'] )
         ->setMaxResults( (int)$get['iDisplayLength'] );
     }
+    
     /*
      * Ordering
      */
@@ -142,5 +149,28 @@ class MailRepository extends EntityRepository
       ->setMaxResults(1)
       ->getResult();
      return $aResultTotal[0][1];
+  }
+
+  public function getBlackList(){
+  	$cols=array();
+  	$count= $this->getCount();
+  	$mails= $this->getEntityManager()
+			->createQuery(
+				'SELECT e FROM AutolinaSampleBundle:Mail e ORDER BY e.id ASC'
+			)
+			->getResult();
+	foreach ($mails as $key=>$val){
+		print_r($val);
+	}
+	for ($i=0; $i<$count; $i++){
+		foreach($mails as $mail){
+			$col[] = array( $mail,
+					    	'<td class="table-action-hide "><a href="" data-toggle="modal" data-target=".make-modal-lg" style="opacity: 0;"><i class="fa fa-pencil"></i></a></td>',
+			            	'<td class="table-action-hide "><a href="" class="delete-row " style="opacity: 0;"><i class="fa fa-trash-o"></i></a></td>'
+				     );
+		}
+	}
+	print_r($cols);
+	return $cols;
   }
 }

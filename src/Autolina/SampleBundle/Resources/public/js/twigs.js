@@ -90,7 +90,7 @@ document.write('<script src="js/custom.js"></script>');
       "bServerSide": true,
       "sAjaxSource": $('#updateURL').val(),
       "columnDefs": [ {
-        "targets": 1,
+        "targets": -1,
         "data": null,
         "defaultContent": "<button>Click!</button>"
       } ]

@@ -16,3 +16,6 @@ autolina_sample_add:
 autolina_sample_update:
     path:     /update
     defaults: { _controller: AutolinaSampleBundle:Default:update }
+autolina_sample_up:
+    path:     /up
+    defaults: { _controller: AutolinaSampleBundle:Default:up }

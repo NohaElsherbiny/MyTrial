@@ -26,18 +26,26 @@ class DefaultController extends Controller
         return $this->render('AutolinaSampleBundle:Default:samplePage.html.twig',array("mails"=>$mails));
     }
 
+    public function upAction(Request $request){
+
+    	$em = $this->getDoctrine()->getManager();
+		$output = $em->getRepository('AutolinaSampleBundle:Mail')
+						->getBlackList();
+    	return new Response(
+      		json_encode($output)
+    	);
+    }
     public function updateAction(Request $request)
     {
    	    $get = $request->query->all();
    	    /* Array of database columns which should be read and sent back to DataTables. Use a space where
     	 * you want to insert a non-database field (for example a counter or static image)
     	 */
-    	$columns = array( 'email');
+    	$columns = array( 'email', 'id' );
     	$get['columns'] = &$columns;
 
     	$em = $this->getDoctrine()->getEntityManager();
     	$rResult = $em->getRepository('AutolinaSampleBundle:Mail')->ajaxTable($get, true)->getArrayResult();
-
     	/* Data set length after filtering */
     	$iFilteredTotal = count($rResult);
 
@@ -51,9 +59,9 @@ class DefaultController extends Controller
       		"iTotalDisplayRecords" => $em->getRepository('AutolinaSampleBundle:Mail')->getFilteredCount($get),
       		"aaData" => array()
     	);	
-
     	foreach($rResult as $aRow){
    			$row = array();
+   			$toData= array();
    			for ( $i=0 ; $i<count($columns) ; $i++ ){
        			if ( $columns[$i] == "version" ){
        				/* Special output formatting for 'version' column */
@@ -61,9 +69,21 @@ class DefaultController extends Controller
        			}elseif ( $columns[$i] != ' ' ){
        	  			/* General output */
        				$row[] = $aRow[ $columns[$i] ];
-       			}
+
+       				for ($i=0; $i<2; $i++){
+    			 		if($i==0)
+    			 			$toData[]=$row[$i];
+    			 		elseif ($i==1)
+    			 			$toData[]='<td class="table-action-hide">
+                          <a href="" data-toggle="modal" data-target=".make-modal-lg" style="opacity: 1;"><i class="fa fa-pencil"></i></a>
+                          <a href="" class="delete-row " style="opacity: 1;"><i class="fa fa-trash-o"></i></a>
+                        </td>';
+    			 	}
+    			}
    			}
-   			$output['aaData'][] = $row;
+   			//print_r($toData);
+       		$output['aaData'][] = $toData;
+       		//$output['aaData'][] = $row;
    		}
 
    		unset($rResult);
