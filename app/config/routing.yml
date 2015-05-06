@@ -1,3 +1,11 @@
+autolina_blacklist:
+    resource: "@AutolinaBlacklistBundle/Resources/config/routing.yml"
+    prefix:   /
+
+autolinanew:
+    resource: "@AutolinanewBundle/Resources/config/routing.yml"
+    prefix:   /
+
 autolina_sample:
     resource: "@AutolinaSampleBundle/Resources/config/routing.yml"
     prefix:   /

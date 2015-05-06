@@ -1,0 +1,28 @@
+
+  jQuery(document).ready(function() {
+    
+    jQuery('#table1').dataTable();
+    
+    jQuery('#table2').dataTable({
+      "sPaginationType": "full_numbers"
+    });
+    
+    // Chosen Select
+    jQuery("select").chosen({
+      'min-width': '100px',
+      'white-space': 'nowrap',
+      disable_search_threshold: 10
+    });
+
+    
+    
+    // Show aciton upon row hover
+    jQuery('.table-hidaction tbody tr').hover(function(){
+      jQuery(this).find('.table-action-hide a').animate({opacity: 1});
+    },function(){
+      jQuery(this).find('.table-action-hide a').animate({opacity: 0});
+    });
+  
+  
+  });
+

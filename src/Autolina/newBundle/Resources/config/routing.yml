@@ -1,0 +1,7 @@
+autolinanew_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AutolinanewBundle:Default:index }
+
+autolinanew_blacklist:
+    path:     /black_list
+    defaults: { _controller: AutolinanewBundle:Default:blacklist }

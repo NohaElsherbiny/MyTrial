@@ -1,0 +1,20 @@
+autolina_blacklist_blacklist:
+    path:     /blacklist
+    defaults: { _controller: AutolinaBlacklistBundle:Default:blacklist }
+
+autolina_blacklist_del:
+    path:     /del
+    defaults: { _controller: AutolinaBlacklistBundle:Default:del }
+
+autolina_blacklist_edit:
+    path:     /edit
+    defaults: { _controller: AutolinaBlacklistBundle:Default:edit }
+
+autolina_blacklist_add:
+    path:     /add
+    defaults: { _controller: AutolinaBlacklistBundle:Default:add }
+
+autolina_blacklist_update:
+    path:     /update
+    defaults: { _controller: AutolinaBlacklistBundle:Default:update }
+

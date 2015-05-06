@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new Autolina\SampleBundle\AutolinaSampleBundle(),
+            new Autolina\newBundle\AutolinanewBundle(),
+            new Autolina\BlacklistBundle\AutolinaBlacklistBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
