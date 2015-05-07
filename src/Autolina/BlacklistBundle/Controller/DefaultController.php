@@ -19,6 +19,13 @@ class DefaultController extends Controller
         return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig', array('mails' => $blacklist));
     }
 
+    public function updateAction(Request $request){
+    	//isn't complete UPDATEME
+    	$Columns = array( 'id','email' );
+    	print_r(request)
+
+    	return new Response();
+    }
     public function delAction(Request $request)
     {
     	$data = $request->request->get('request');

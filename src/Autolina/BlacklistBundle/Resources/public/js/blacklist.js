@@ -9,7 +9,9 @@
     var t = $('#table2').DataTable({
       "bRetrieve":  true,
       "sPaginationType": "full_numbers",
-      "order": [[ 1, "asc" ]]
+      "order": [[ 1, "asc" ]],
+      "iDisplayLength": 5,
+      "stateSave": true
     });
     
     // Chosen Select
@@ -34,6 +36,7 @@
                 mail,
                 newrow
               ] );
+              
               alert("SUCCESS, id ="+response);
             }
             else{
@@ -60,6 +63,7 @@
           success: function(response){
             //t.fnDeleteRow($row);
             tr.fadeOut().remove();
+            $("#table2").dataTable().fnDraw();
           },
           error: function(XMLHttpRequest, textStatus, errorThrown)
           {
