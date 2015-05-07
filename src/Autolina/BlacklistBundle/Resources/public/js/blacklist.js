@@ -1,12 +1,12 @@
 
   jQuery(document).ready(function() {
     
-    jQuery('#table1').dataTable();
+    $('#table1').DataTable();
     
     
    // var myTable = $('#table2').dataTable();
 
-    var t = jQuery('#table2').dataTable({
+    var t = $('#table2').DataTable({
       "bRetrieve":  true,
       "sPaginationType": "full_numbers",
       "order": [[ 1, "asc" ]]
@@ -29,7 +29,7 @@
           data: {mail : mail},
           success: function(response){
             if(response == parseInt(response, 10)){
-              newrow='<td class="table-action-hide"><a href="#" data-toggle="modal" data-target=".make-modal-lg" data-type="editRow" data-email="'+mail+'" data-id="'+response+'" style="opacity: 0;"><i class="fa fa-pencil"></i></a><a href="" class="delete-row" data-type="delRow"  data-id="'+response+'" style="opacity: 0;"><i class="fa fa-trash-o"></i></a></td>';
+              newrow='<td class="table-action-hide"><a href="#" data-toggle="modal" data-target=".make-modal-lg" data-type="editRow" data-email="'+mail+'" data-id="'+response+'" style="opacity: 1;"><i class="fa fa-pencil"></i></a><a href="#" class="delete-row" data-type="delRow"  data-id="'+response+'" style="opacity: 1;"><i class="fa fa-trash-o"></i></a></td>';
               t.fnAddData( [
                 mail,
                 newrow
@@ -47,9 +47,10 @@
         });
     });
     // Delete row in a table
-    $('*[data-type="delRow"]').click(function(){
+    $('*[data-type="delRow"]').click(function(e){
+      e.stopPropagation();
       var c = confirm("Continue delete?");
-      var $row =  $(this).parent().parent();
+      var tr = $(this).closest('tr');
       var id =  $(this).attr('data-id');
       if(c){
         $.ajax({
@@ -58,7 +59,7 @@
           data: { id: id},
           success: function(response){
             //t.fnDeleteRow($row);
-            $row.fadeOut().remove();
+            tr.fadeOut().remove();
           },
           error: function(XMLHttpRequest, textStatus, errorThrown)
           {
@@ -74,6 +75,8 @@
     var toEditEmail=null;
     $('*[data-type="editRow"]').click(function(){
       //var $row =  $(this).parent().parent();
+      var tr = $(this).closest('tr');
+      console.log(tr);
       toEditEmail=[$(this).attr('data-email'),$(this).attr('data-id')];
       jQuery(function () {
         jQuery('.col-sm-6 input').val(toEditEmail[0]);
@@ -88,7 +91,7 @@
       var id = toEditEmail[1];
       var oldmail = $("td").filter(function() { 
         return $.text([this]) == toEditEmail[0]; });
-      //x.text("edit");
+      console.log("edit"+ oldmail);
       $.ajax({
           type: "POST",
           url: $('#editURL').val(),
@@ -96,7 +99,6 @@
           success: function(response){
             if(response == parseInt(response, 10)){
               oldmail.text(mail);
-              t.order( [[ 1, 'asc' ]] ).draw( false );
               jQuery('#modal').modal('hide');
               alert("The email is successfully editted.");
             }
@@ -113,12 +115,13 @@
     
     
     // Show aciton upon row hover
-    $(documnet).on( '.table-hidaction tbody tr' 'mouseover', function(){
+    //TODO not working
+    /*$('body').on( 'hover','#table2 tbody tr', function(){
       jQuery(this).find('.table-action-hide a').animate({opacity: 1});
     },function(){
       jQuery(this).find('.table-action-hide a').animate({opacity: 0});
     });
-  
+  */
   
   });
 
