@@ -66,7 +66,7 @@
           success: function(response){
             //t.fnDeleteRow($row);
             tr.fadeOut().remove();
-            $("#table2").dataTable().fnDraw();
+            $("#table2").dataTable().fnDraw(false);
           },
           error: function(XMLHttpRequest, textStatus, errorThrown)
           {
@@ -106,7 +106,7 @@
             if(response == parseInt(response, 10)){
               oldmail.text(mail);
               jQuery('#modal').modal('hide');
-              $("#table2").dataTable().fnDraw();
+              $("#table2").dataTable().fnDraw(false);
               alert("The email is successfully editted.");
             }
             else{
