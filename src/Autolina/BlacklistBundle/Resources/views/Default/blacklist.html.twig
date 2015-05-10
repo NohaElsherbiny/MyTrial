@@ -238,15 +238,15 @@
             </thead>
 
             <tbody>
-            {% for mail in mails %}
+            {#% for mail in mails %#}
               <tr>
-                <td>{{mail.email}}</td>
+                <td> </td>
                   <td class="table-action-hide">
-                    <a href="#" data-toggle="modal" data-target=".make-modal-lg" data-type="editRow" data-email="{{mail.email}}" data-id="{{mail.id}}" style="opacity: 1;"><i class="fa fa-pencil"></i></a>
-                    <a href="javascript:void(0)" class="delete-row" data-type="delRow"  data-id="{{mail.id}}" style="opacity: 1;"><i class="fa fa-trash-o"></i></a>
+                    <a href="#" data-toggle="modal" data-target=".make-modal-lg" data-type="editRow" style="opacity: 1;"><i class="fa fa-pencil"></i></a>
+                    <a href="javascript:void(0)" class="delete-row" data-type="delRow"  style="opacity: 1;"><i class="fa fa-trash-o"></i></a>
                 </td>           
               </tr>
-            {%endfor%}
+            {#%endfor%#}
               
             </tbody>
           </table>

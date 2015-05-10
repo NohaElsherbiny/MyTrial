@@ -11,14 +11,17 @@ use Doctrine\ORM\PersistentCollection;
 
 class DefaultController extends Controller
 {
-    public function BlacklistAction()
+    /*public function BlacklistAction()
     {
     	$em = $this->getDoctrine()->getManager();
 		$blacklist = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
 						->getSorted("asc");	
 		return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig', array('mails' => $blacklist));
+    }*/
+    public function BlacklistAction()
+    {
+    	return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig');
     }
-
     public function updateAction(Request $request){
     	//isn't complete UPDATEME
     	$em = $this->getDoctrine()->getManager();

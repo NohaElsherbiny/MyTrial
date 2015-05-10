@@ -21,7 +21,6 @@ class BlacklistRepository extends EntityRepository
 			->getResult();
 	}
 	public function getPage($iDisplayStart, $iDisplayLength, $sSortDir_0,$bSearchable_0,$sSearch){
-		$len=$iDisplayStart+$iDisplayLength;
 		if($bSearchable_0 == "true" ){
 			if($sSearch != ""){
 				return $this->getEntityManager()
