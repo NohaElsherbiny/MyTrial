@@ -11,7 +11,10 @@
       "sPaginationType": "full_numbers",
       "order": [[ 1, "asc" ]],
       "iDisplayLength": 5,
-      "stateSave": true
+      "stateSave": true,
+      "bProcessing": true,
+      "bServerSide": true,
+      "sAjaxSource": $('#updateURL').val()
     });
     
     // Chosen Select
@@ -50,7 +53,7 @@
         });
     });
     // Delete row in a table
-    $('*[data-type="delRow"]').click(function(e){
+    $('body').delegate('*[data-type="delRow"]','click',function(e){
       e.stopPropagation();
       var c = confirm("Continue delete?");
       var tr = $(this).closest('tr');
@@ -77,8 +80,7 @@
     // Edit row in a table
       // send selected email to modal
     var toEditEmail=null;
-    $('*[data-type="editRow"]').click(function(){
-      //var $row =  $(this).parent().parent();
+    $('body').delegate('*[data-type="editRow"]','click', function(){
       var tr = $(this).closest('tr');
       console.log(tr);
       toEditEmail=[$(this).attr('data-email'),$(this).attr('data-id')];
@@ -104,6 +106,7 @@
             if(response == parseInt(response, 10)){
               oldmail.text(mail);
               jQuery('#modal').modal('hide');
+              $("#table2").dataTable().fnDraw();
               alert("The email is successfully editted.");
             }
             else{

@@ -15,17 +15,56 @@ class DefaultController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
 		$blacklist = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
-						->findOnebyOne();	
-        return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig', array('mails' => $blacklist));
+						->getSorted("asc");	
+		return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig', array('mails' => $blacklist));
     }
 
     public function updateAction(Request $request){
     	//isn't complete UPDATEME
-    	$Columns = array( 'id','email' );
-    	print_r(request)
+    	$em = $this->getDoctrine()->getManager();
+    	$get = $request->query->all();
 
-    	return new Response();
+    	$Columns = array( 'id','email' );
+    	$iColumns = $get['iColumns'];
+    	$iDisplayStart = $get['iDisplayStart'];
+    	$iDisplayLength = $get['iDisplayLength'];
+    	$bSearchable_0 = $get['bSearchable_0'];
+    	$sSearch = $get['sSearch'];
+    	$sSortDir_0 = $get['sSortDir_0'];
+
+    	$iTotal = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
+    				 ->getCount($sSortDir_0);
+    	$iFilteredTotal = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
+    						 ->getFilteredTotal($bSearchable_0,$sSearch,$sSortDir_0);
+    	$output = array(
+        	"sEcho" => (int)$get['sEcho'],
+        	"iTotalRecords" => $iTotal,
+        	"iTotalDisplayRecords" => $iFilteredTotal,
+        	"aaData" => $this-> getBlacklist($iDisplayStart, $iDisplayLength, $sSortDir_0,$bSearchable_0,$sSearch)
+    	);
+    	return new Response(
+      		json_encode($output)
+    	);
     }
+
+    public function getBlacklist($iDisplayStart, $iDisplayLength, $sSortDir_0,$bSearchable_0,$sSearch){
+    	$em = $this->getDoctrine()->getManager();
+    	$Page = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
+				   ->getPage($iDisplayStart, $iDisplayLength, $sSortDir_0,$bSearchable_0,$sSearch);
+		$data = array();
+		$id = 0;
+		foreach($Page as $Mail){
+			$id = $Mail->getId();
+			$email=$Mail->getEmail();
+			$data[]=array($email,
+    				'<td class="table-action-hide">
+                     <a href="#" data-toggle="modal" data-target=".make-modal-lg" data-type="editRow" data-email="'.$email.'" data-id="'.$id.'" style="opacity: 1;"><i class="fa fa-pencil"></i></a>
+                     <a href="javascript:void(0)" class="delete-row" data-type="delRow"  data-id="'.$id.'" style="opacity: 1;"><i class="fa fa-trash-o"></i></a>
+                     </td>');
+    	}
+		return $data; 
+    }
+    	
     public function delAction(Request $request)
     {
     	$data = $request->request->get('request');
