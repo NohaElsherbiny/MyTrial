@@ -29,7 +29,7 @@ class BlacklistRepository extends EntityRepository
 						'SELECT e FROM AutolinaBlacklistBundle:Blacklist e WHERE e.email LIKE \'%'.$sSearch.'%\' ORDER BY e.email '.$sSortDir_0.''
 					)
 					->setFirstResult($iDisplayStart)
-        			->setMaxResults($len)
+        			->setMaxResults($iDisplayLength)
 					->getResult();
 			}
 		}
@@ -38,7 +38,7 @@ class BlacklistRepository extends EntityRepository
 				'SELECT e FROM AutolinaBlacklistBundle:Blacklist e ORDER BY e.email '.$sSortDir_0.''
 			)
 			->setFirstResult($iDisplayStart)
-        	->setMaxResults($len)
+        	->setMaxResults($iDisplayLength)
 			->getResult();
 	}
   	public function getCount($sSortDir_0){

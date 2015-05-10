@@ -22,7 +22,9 @@ class DefaultController extends Controller
     public function updateAction(Request $request){
     	//isn't complete UPDATEME
     	$em = $this->getDoctrine()->getManager();
-    	$get = $request->query->all();
+    	$blacklist = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
+						->getSorted("asc");	
+		$get = $request->query->all();
 
     	$Columns = array( 'id','email' );
     	$iColumns = $get['iColumns'];
