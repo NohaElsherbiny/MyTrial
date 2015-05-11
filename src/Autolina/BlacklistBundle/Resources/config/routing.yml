@@ -13,8 +13,13 @@ autolina_blacklist_edit:
 autolina_blacklist_add:
     path:     /add
     defaults: { _controller: AutolinaBlacklistBundle:Default:add }
+    requirements: {_method: POST}
 
 autolina_blacklist_update:
     path:     /update
     defaults: { _controller: AutolinaBlacklistBundle:Default:update }
+
+autolina_blacklist_invalid:
+    path:     /invalid
+    defaults: { _controller: AutolinaBlacklistBundle:Default:invalid }
 

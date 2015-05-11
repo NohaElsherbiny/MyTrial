@@ -215,15 +215,16 @@
           <div class="table-responsive">
 
 <div class="form-group">
+              <!--form  method="post"-->
               <div class="col-sm-3">
                 <input type="text" id="addedmail" placeholder="E-mail" class="form-control">
               </div>
 
               <div class="col-sm-2">
-               <button class="btn btn-primary" id="addRow">Erfassen</button>
+               <button data-token="{{token}}" class="btn btn-primary" id="addRow">Erfassen</button>
               </div>
             </div>
-
+            <!--/form-->
        <input id="addURL"  value="{{path('autolina_blacklist_add')}}"  type="hidden">
        <input id="delURL"  value="{{path('autolina_blacklist_del')}}"  type="hidden"/>
        <input id="editURL" value="{{path('autolina_blacklist_edit')}}" type="hidden"/>

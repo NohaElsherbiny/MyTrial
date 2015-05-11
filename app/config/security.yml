@@ -29,7 +29,11 @@ security:
         demo_login:
             pattern:  ^/demo/secured/login$
             security: false
-
+        #csrf getting_secured
+        #secured_area:
+            #form_login:
+             #   csrf_provider: form.csrf_provider
+        
         # secures part of the application
         demo_secured_area:
             pattern:    ^/demo/secured/

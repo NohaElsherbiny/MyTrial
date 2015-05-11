@@ -28,10 +28,11 @@
     jQuery('#addRow').click(function(){
       var mail= $('#addedmail').val();
       var newrow = null;
+      var token = $(this).attr('data-token');
       $.ajax({
           type: "POST",
           url: $('#addURL').val(),
-          data: {mail : mail},
+          data: {mail : mail ,token:token},
           success: function(response){
             if(response == parseInt(response, 10)){
               newrow='<td class="table-action-hide"><a href="#" data-toggle="modal" data-target=".make-modal-lg" data-type="editRow" data-email="'+mail+'" data-id="'+response+'" style="opacity: 1;"><i class="fa fa-pencil"></i></a><a href="#" class="delete-row" data-type="delRow"  data-id="'+response+'" style="opacity: 1;"><i class="fa fa-trash-o"></i></a></td>';

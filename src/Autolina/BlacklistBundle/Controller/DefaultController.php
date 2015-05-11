@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Autolina\BlacklistBundle\Entity\BlacklistRepository;
 use Autolina\BlacklistBundle\Entity\Blacklist;
 use Doctrine\ORM\PersistentCollection;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 class DefaultController extends Controller
 {
     /*public function BlacklistAction()
@@ -20,10 +20,11 @@ class DefaultController extends Controller
     }*/
     public function BlacklistAction()
     {
-    	return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig');
+    	$token = $this->get('form.csrf_provider')->generateCsrfToken('');
+        return $this->render('AutolinaBlacklistBundle:Default:blacklist.html.twig',array ('token'=>$token));
     }
     public function updateAction(Request $request){
-    	//isn't complete UPDATEME
+    	
     	$em = $this->getDoctrine()->getManager();
     	$blacklist = $em->getRepository('AutolinaBlacklistBundle:Blacklist')
 						->getSorted("asc");	
@@ -109,6 +110,13 @@ class DefaultController extends Controller
     }
     public function addAction(Request $request)
     {
+        $token = $request->get('token');
+        $intention="";
+        if(!$this->get('form.csrf_provider')->isCsrfTokenValid($intention,$token)){
+            //$this->get('session')->setFlash('notice', 'Woops! Token is invalid');
+
+            return $this->redirect('invalid');
+        }
     	$mail = $request->get('mail');
     	$newmail = new Blacklist();
     	$newmail->setEmail($mail);
@@ -126,5 +134,8 @@ class DefaultController extends Controller
 			$successString = $id;
 			return new Response($successString);
 		}
+    }
+    public function invalidAction(){
+        return $this->render('AutolinaBlacklistBundle:Default:invalid.html.twig');
     }
 }
